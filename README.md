@@ -6,7 +6,7 @@ In this project, you'll be creating a frontend that graphically displays train i
 
 ## Setting Up
 
-- Fork this repository, set the owner to BoG-Dev-Bootcamp-S26, and name it `project2-s26-yourname`
+- Fork this repository, set the owner to BoG-Developer-Bootcamp-Fall-26, and name it `project2-f26-yourname`
 - Clone the repository onto your local computer
 - Navigate to your new project folder and run:
   - `npm create vite@latest -- --no-interactive --template react-ts marta-interface`
@@ -36,7 +36,7 @@ In this project, you'll be creating a frontend that graphically displays train i
 
 Create a 0.5-2 minute demo video to showcase your project's functionality (this is just so that we don't have to go through and install dependencies / deal with versioning errors for every single exercise, we're still gonna look at your code)!
 
-- **Due Date**: 3/17/2026
+- **Due Date**: 10/22/2026
 
 ## Instructions
 
@@ -71,22 +71,22 @@ We are going to incorporate state to render the page based on each train line. C
 
 ### Dynamic data and `useEffect`
 
-For this project, we are calling this URL: "<https://midsem-bootcamp-api.onrender.com>". You can get the filtered trains for each line using this link by adding "<https://midsem-bootcamp-api.onrender.com/arrivals/{LINE_COLOR}>"; for example, to get the trains from the gold line, call "<https://midsem-bootcamp-api.onrender.com/arrivals/gold>".
+For this project, we are calling this URL: "<https://marta-bootcamp-api.vercel.app>". You can get the filtered trains for each line using this link by adding "<https://marta-bootcamp-api.vercel.app/arrivals/{LINE_COLOR}>"; for example, to get the trains from the gold line, call "<https://marta-bootcamp-api.vercel.app/arrivals/gold>".
 
-To get data for stations, you can use "<https://midsem-bootcamp-api.onrender.com/stations/{LINE_COLOR}>"; for example, to get the stations from the gold line, you can call "<https://midsem-bootcamp-api.onrender.com/stations/gold>".
+To get data for stations, you can use "<https://marta-bootcamp-api.vercel.app/stations/{LINE_COLOR}>"; for example, to get the stations from the gold line, you can call "<https://marta-bootcamp-api.vercel.app/stations/gold>".
 
-*Important note:* Previously, we learned how to call from an API using fetch(); however, React can have issues with rendering using fetch as if the called data has not arrived yet but is being asked to be displayed there will be an issue. To handle this we will incorporate useEffect()! We will have two states added to LinesPage.tsx: loading and data, dafaultly set to true and null. Then, we will add useEffect() below like so (where the line in the URL is a variable that changes based on the current state of the line from the line buttons):
+You can also access mocked data through "<https://marta-bootcamp-api.vercel.app/mock/{api}>" if the MARTA API fails or you would like to test on static data. Example URLs: "<https://marta-bootcamp-api.vercel.app/mock/arrivals/{LINE_COLOR}>" and "<https://marta-bootcamp-api.vercel.app/mock/stations/{LINE_COLOR}>".
+
+*Important note:* Previously, we learned how to call from an API using fetch(); however, React can have issues with rendering using fetch as if the called data has not arrived yet but is being asked to be displayed there will be an issue. To handle this we will incorporate useEffect()! We will have two states added to LinesPage.tsx: loading and data, defaultly set to true and null. Then, we will add useEffect() below like so (where the line in the URL is a variable that changes based on the current state of the line from the line buttons):
 
 ```tsx
 //ADD MORE CODE TO ACCOUNT FOR LOADING
 useEffect(() => {
         fetch("[URL]")
-        .then(response => response.tsxon())
+        .then(response => response.json())
         .then(data => setData(data))
       },[])
 ```
-
-*Another important note:* When calling the API, there might me some periods of time when it is down, meaning you might get a 'Fetch Error' even when your fetched URL is correct. Please wait 15-30 seconds before attempting to fetch again. This is due to our hosting server being on a free tier 😔. If you still receive an error after waiting, please look at your code to see if there are any errors in the URL you are fetching!
 
 ### More filtering
 
@@ -96,7 +96,7 @@ When a button is clicked it will filter the trains by the filter titled on the b
 
 As a bonus, once the rest of the code displays successfully, we recommend incorporating conditional rendering so that if the filters used on the trainlist result in an empty list of trains, then display something else to notify the user that there are no trains rather than just displaying an empty page. For example, you could add a "No Current Trains Match Filters" message.
 
-### Two New Pages (**NEW**)
+### Two New Pages
 
 Now that we are set up, we want to add two new pages! We will call these `Home.tsx` and `About.tsx`.
 
@@ -104,9 +104,9 @@ In `Home.tsx` you can create a simple MARTA homescreen page up to your own desig
 
 In `About.tsx`, you will create a simple page that displays the MARTA map and some basic information about the MARTA's purpose on the page. This page will include a button somewhere linking back to the home page.
 
-### Routing (**NEW**)
+### Routing
 
-Install React Router by entering `npm install react-router-dom` in terminal. At the top of each page import router by doing `import { BrowserRouter, Route, Routes } from 'react-router-dom';`. Now, you can set up routes in the return of your display pages!
+Install React Router with npm install react-router-dom. Wrap your app once in <BrowserRouter> (in main.tsx or App.tsx), then define your pages with <Routes> and <Route> in App.tsx. Inside your pages, use <Link to="/"> or the useNavigate() hook to move between pages, for example the About page's button back to Home.
 
 ## Requirements
 
@@ -114,7 +114,7 @@ Install React Router by entering `npm install react-router-dom` in terminal. At 
 - Create a Train.tsx component inside the components folder that displays the information for each train, and a TrainList.tsx component that displays the train data for a specified line
 - In App.tsx, display the LinesPage.tsx page
 - For each line's page, display each train's data by feeding each entry in the filtered array into the Train.tsx component as props.
-- Call the MARTA API by fetching from the link provided: "<https://midsem-bootcamp-api.onrender.com>"
+- Call the MARTA API by fetching from the link provided: "<https://marta-bootcamp-api.vercel.app>"
 - Incorporate state buttons to display trains based on each line color (gold, red, green blue)
 - Make the navbar functional so that the trains are filtered by one station at a time
 - Make the four buttons functional so that the trains are filtered by one or more buttons at a time ("Arriving", "Scheduled", "Northbound/Southbound" or "Eastbound/Westbound")
