@@ -182,3 +182,27 @@
     border-right-color: var(--border);
   }
 }
+
+.train-layout {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.filter-buttons button {
+  padding: 8px 18px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.filter-buttons button.active {
+  background-color: #bdbdbd;
+}

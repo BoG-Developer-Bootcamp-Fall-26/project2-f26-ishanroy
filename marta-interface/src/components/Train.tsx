@@ -4,6 +4,8 @@ export type TrainData = {
     LINE: string;
     WAITING_TIME: string;
     DELAY: string;
+    DIRECTION: string;
+    IS_REALTIME: string;
 };
 
 export default function Train({
