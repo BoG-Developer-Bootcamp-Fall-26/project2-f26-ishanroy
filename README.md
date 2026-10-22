@@ -17,7 +17,7 @@ In this project, you'll be creating a frontend that graphically displays train i
   import { defineConfig } from 'vite'
   import react from '@vitejs/plugin-react'
   import tailwindcss from "@tailwindcss/vite";
-  
+
   // https://vite.dev/config/
   export default defineConfig({
     plugins: [
@@ -35,6 +35,8 @@ In this project, you'll be creating a frontend that graphically displays train i
 ## Submission
 
 Create a 0.5-2 minute demo video to showcase your project's functionality (this is just so that we don't have to go through and install dependencies / deal with versioning errors for every single exercise, we're still gonna look at your code)!
+
+![Project 2 Video](<BoG project 2.gif>)
 
 - **Due Date**: 10/22/2026
 
