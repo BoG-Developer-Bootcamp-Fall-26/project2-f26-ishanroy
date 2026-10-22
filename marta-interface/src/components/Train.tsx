@@ -18,12 +18,25 @@ export default function Train({
     const isOnTime = DELAY === "TOS";
 
     return (
-        <div>
-            <h3>{STATION} → {DESTINATION}</h3>
-            <p>Line: {LINE}</p>
-            <p>Arrival: {WAITING_TIME}</p>
-            <p>{isOnTime ? "On Time" : "Delayed"}</p>
-            <hr />
+        <div className="train-card">
+            <div className="train-card-main">
+                <div className="train-logo">M</div>
+
+                <div className="train-details">
+                    <h3>{STATION} → {DESTINATION}</h3>
+                    <p>Destination: {DESTINATION}</p>
+                    <span className={`line-badge ${LINE.toLowerCase()}`}>
+                        {LINE}
+                    </span>
+                </div>
+            </div>
+
+            <div className="train-card-status">
+                <span className={isOnTime ? "on-time" : "delayed"}>
+                    {isOnTime ? "On Time" : "Delayed"}
+                </span>
+                <strong>{WAITING_TIME}</strong>
+            </div>
         </div>
     );
 }

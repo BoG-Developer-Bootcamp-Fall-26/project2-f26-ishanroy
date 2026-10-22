@@ -1,10 +1,15 @@
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import TrainList from "../components/TrainList";
 import type { TrainData } from "../components/Train";
 import NavBar from "../components/NavBar";
 
 export default function LinesPage() {
-    const [currColor, setCurrColor] = useState("gold");
+    const { color } = useParams();
+    const navigate = useNavigate();
+
+    const validColors = ["gold", "red", "blue", "green"]
+    const currColor = color && validColors.includes(color) ? color : "gold"
     const [trains, setTrains] = useState<TrainData[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
@@ -77,7 +82,7 @@ export default function LinesPage() {
     }, [currColor]);
 
     function changeLine(color: string) {
-        setCurrColor(color);
+        navigate(`/lines/${color}`);
         setTrains([]);
         setLoading(true);
         setError("");
@@ -132,11 +137,11 @@ export default function LinesPage() {
         <div>
             <h1>{currColor.toUpperCase()} Line</h1>
 
-            <div>
-                <button onClick={() => changeLine("gold")}>Gold</button>
-                <button onClick={() => changeLine("red")}>Red</button>
-                <button onClick={() => changeLine("blue")}>Blue</button>
-                <button onClick={() => changeLine("green")}>Green</button>
+            <div className="line-buttons">
+                <button className="gold-line" onClick={() => changeLine("gold")}>Gold</button>
+                <button className="red-line" onClick={() => changeLine("red")}>Red</button>
+                <button className="blue-line" onClick={() => changeLine("blue")}>Blue</button>
+                <button className="green-line" onClick={() => changeLine("green")}>Green</button>
             </div>
 
             {loading ? (
@@ -146,19 +151,22 @@ export default function LinesPage() {
             ) : (
                 <div className="train-layout">
                     <NavBar stations={stations} selectedStation={selectedStation} onSelectStation={setSelectedStation} />
-                    <div className="filter-buttons">
+                    <div className="train-content">
+                        <div className="filter-buttons">
                         {filterButtons.map((filter) => (
                             <button key={filter} onClick={() => toggleFilter(filter)} className={activeFilters.includes(filter) ? "active" : ""}>
                                 {filter}
                             </button>
                         ))}
+                            </div>
+                            {filteredTrains.length === 0 ? (
+                                <p>No current trains match your filters.</p>
+                            ): (
+                                <TrainList trains={filteredTrains} />
+                            )}
+                        </div>
                     </div>
-                    {filteredTrains.length === 0 ? (
-                        <p>No current trains match your filters.</p>
-                    ): (
-                        <TrainList trains={filteredTrains} />
-                    )}
-                </div>
+
             )}
         </div>
     );

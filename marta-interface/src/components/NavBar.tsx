@@ -13,19 +13,22 @@ export default function NavBar({ stations, selectedStation, onSelectStation }: N
         ...new Set(stations.map((station => station.STATION)))
     ]
     return (
-        <div>
+        <div className="station-sidebar">
             <h2>Stations</h2>
 
-            <button onClick={() => onSelectStation("")}>
+            <button
+            className={selectedStation === "" ? "selected" : ""}
+            onClick={() => onSelectStation("")}>
                 All Stations
             </button>
 
             {uniqueStations.map((station) => (
-                <div key={station}>
-                    <button onClick={() => onSelectStation(station)} style={{
-                        backgroundColor: selectedStation === station ? "lightgreen" : "",
-                    }}>{station}</button>
-                </div>
+                    <button
+                        key={station}
+                    onClick={() => onSelectStation(station)}
+                    className={selectedStation === station ? "selected" : ""}>
+                        {station}
+                    </button>
             ))}
         </div>
     )
